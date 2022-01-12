@@ -1,0 +1,27 @@
+['Flow Output','New SCO1 Associated Split %']=N:
+
+IF(['SCO1 Transactions'] =
+DB('Retail Drivers','No Activity',!Stores,'All Store Types','All Formats','No Store Model','No Store SAG','No Commodity Group',!Flow,!Version,!Time by Week,'Transactions') *
+DB('Store Allocations','CT044_01 - SCO1 Manning',!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %'),
+
+DB('Store Allocations',DB('Store Information',!Stores,!Flow,!Version,!Time by Week,'SCO1 Associated Bank'),!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %'),
+
+IF(DB('Store Allocations',DB('Store Information',!Stores,!Flow,!Version,!Time by Week,'SCO1 Associated Bank'),!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %') -
+IF(['SCO1 Transactions']/DB('Retail Drivers','No Activity',!Stores,'All Store Types','All Formats','No Store Model','No Store SAG','No Commodity Group',!Flow,!Version,!Time by Week,'Transactions') -  
+DB('Store Allocations','CT044_01 - SCO Bank 1 Manning',!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %')<0,
+
+0,
+
+['SCO1 Transactions']/DB('Retail Drivers','No Activity',!Stores,'All Store Types','All Formats','No Store Model','No Store SAG','No Commodity Group',!Flow,!Version,!Time by Week,'Transactions') -  
+DB('Store Allocations','CT044_01 - SCO Bank 1 Manning',!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %'))<0,
+
+DB('Store Allocations',DB('Store Information',!Stores,!Flow,!Version,!Time by Week,'SCO1 Associated Bank'),!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %'),
+
+DB('Store Allocations',DB('Store Information',!Stores,!Flow,!Version,!Time by Week,'SCO1 Associated Bank'),!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %') -
+IF(['SCO1 Transactions']/DB('Retail Drivers','No Activity',!Stores,'All Store Types','All Formats','No Store Model','No Store SAG','No Commodity Group',!Flow,!Version,!Time by Week,'Transactions') -  
+DB('Store Allocations','CT044_01 - SCO Bank 1 Manning',!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %')<0,
+
+0,
+
+['SCO1 Transactions']/DB('Retail Drivers','No Activity',!Stores,'All Store Types','All Formats','No Store Model','No Store SAG','No Commodity Group',!Flow,!Version,!Time by Week,'Transactions') -  
+DB('Store Allocations','CT044_01 - SCO Bank 1 Manning',!Stores,'No Commodity Group',!Version,!Time by Week,'Till Split %'))));		
